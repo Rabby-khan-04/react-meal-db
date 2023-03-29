@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
-const MealCard = ({ meal }) => {
+const MealCard = ({ meal, handelFavList }) => {
   const { idMeal, strCategory, strInstructions, strMeal, strMealThumb } = meal;
   return (
     <div className="card card-side bg-base-100 shadow-xl">
@@ -22,8 +22,11 @@ const MealCard = ({ meal }) => {
           {strCategory}
         </p>
         <div className="card-actions justify-start">
-          <button className="btn btn-primary">
-            Add To List{" "}
+          <button
+            className="btn btn-primary"
+            onClick={() => handelFavList(meal)}
+          >
+            Add To List
             <span className="ml-2">
               <FontAwesomeIcon icon={faListCheck} />
             </span>
