@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { addToDB, getItemFromDB } from "../../utilitites/HandelBD";
+import {
+  addToDB,
+  getItemFromDB,
+  removeFromList,
+} from "../../utilitites/HandelBD";
 import Hero from "../Hero/Hero";
 import Meals from "../Meals/Meals";
 import SideList from "../SideList/SideList";
@@ -31,6 +35,11 @@ const Body = () => {
       .catch((error) => console.log(error));
   }, [searchText]);
 
+  const removeItme = (id) => {
+    removeFromList(id);
+    const remainingList = JSON.parse(localStorage.getItem("favourit-list"));
+    setMealList(remainingList);
+  };
   return (
     <main>
       <Hero handelSearch={handelSearch}></Hero>
@@ -39,7 +48,7 @@ const Body = () => {
           <Meals mealsData={meals} handelFavList={handelFavList}></Meals>
         </div>
         <div className="bg-secondary py-20 px-10">
-          <SideList mealList={mealList}></SideList>
+          <SideList mealList={mealList} removeItme={removeItme}></SideList>
         </div>
       </div>
     </main>

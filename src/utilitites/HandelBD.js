@@ -23,4 +23,11 @@ const getItemFromDB = () => {
   return favouriteList;
 };
 
-export { addToDB, getItemFromDB };
+const removeFromList = (id) => {
+  const storedList = JSON.parse(localStorage.getItem("favourit-list"));
+  console.log(storedList);
+  const remaining = storedList.filter((item) => item.id !== id);
+  localStorage.setItem("favourit-list", JSON.stringify(remaining));
+};
+
+export { addToDB, getItemFromDB, removeFromList };
